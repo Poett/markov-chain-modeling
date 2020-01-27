@@ -1,6 +1,6 @@
-package com.titan.cdecoux.core
+package com.cdecoux.titan.core
 
-import com.titan.cdecoux.core.util.Random
+import com.cdecoux.titan.util.Random
 
 import scala.util.Sorting
 import scala.runtime.ScalaRunTime._

@@ -1,4 +1,4 @@
-package com.titan.cdecoux.core.model
+package com.cdecoux.titan.model
 
 class MarkovChain {
 
