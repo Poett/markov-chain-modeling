@@ -39,8 +39,15 @@ object MarkovChain {
 
     def chainFromTransitionCounts[T](transition_map_counts: Map[T, Map[T, Int]]): MarkovChain[T] = {
 
-        val transition_table =  Map[T, Map[T, Float]]()
+        val transition_table = transition_map_counts map {
+            case (k, m: Map[String, Int]) =>
+                val total = m.values.sum
+                (k, m map {
+                    case (k: String, v: Int) =>
+                        (k -> v.toFloat / total)
 
+                })
+        }
         MarkovChain[T](transition_table)
     }
 }

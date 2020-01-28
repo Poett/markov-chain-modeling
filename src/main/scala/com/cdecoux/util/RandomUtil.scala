@@ -3,9 +3,11 @@ package com.cdecoux.util
 import scala.annotation.tailrec
 import scala.util.{Failure, Random, Success, Try}
 
-object Random {
+object RandomUtil {
 
+    // Double to float overloads
     def selectFromDistribution(probabilities: Array[Double]): Int = selectFromDistribution(probabilities.map(x => x.toFloat))
+    def selectFromDistribution[T](m_double: => Map[T, Double]): T = selectFromDistribution(m_double map { case (k, v: Double) => (k, v.toFloat) })
 
     /**
      * This function takes in an iterable object that pairs some object with a float value, which defines a custom random distribution for each object key

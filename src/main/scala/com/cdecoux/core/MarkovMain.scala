@@ -1,16 +1,22 @@
 package com.cdecoux.core
 
-import com.cdecoux.util.Random
+import com.cdecoux.util.RandomUtil
 
 object MarkovMain {
 
     def main(args: Array[String]): Unit = {
 
-        val label = Array("A", "B", "C")
-        val prob = Array(0.1, 0.4, 0.5)
+//        val label = Array("A", "B", "C")
+//        val prob = Array(0.1, 0.4, 0.5)
+
+        val custom_distribution = Map (
+            ("A" -> 0.1),
+            ("B" -> 0.4),
+            ("C" -> 0.5)
+        )
 
         // Less than 0.1, A. Less than 0.5, B. Less than 1, C.
-        val values = new Array[String](10000000).map(_ => label(Random.selectFromDistribution(prob)))
+        val values = new Array[String](10000000).map(_ => RandomUtil.selectFromDistribution(custom_distribution))
 
 
         val counts = values.groupBy(identity).transform( (x, a) => a.length)
