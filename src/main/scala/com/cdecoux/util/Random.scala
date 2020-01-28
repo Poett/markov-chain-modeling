@@ -7,6 +7,42 @@ object Random {
 
     def selectFromDistribution(probabilities: Array[Double]): Int = selectFromDistribution(probabilities.map(x => x.toFloat))
 
+
+    @throws[RandomDistributionError]
+    def selectFromDistribution[T](m: Map[T, Float]): T = {
+
+        // Check for incorrect format for probability model
+        if(m.values.sum != 1.0) throw new RandomDistributionError("Probability values summation is not 1.0.")
+
+
+        // Generate a random float (0, 1.000]
+        lazy val num: Float = {
+            new Random().nextFloat() match {
+                case x => if (x != 0) x else num
+            }
+        }
+
+        // Define control flow for checking distribution and the random number
+        @scala.annotation.tailrec
+        def attempt(m: Iterator[(T, Float)], acc: Float, random: Float): Option[T] = {
+            if(m.hasNext){
+                m.next match {
+                    case (k, v) => {
+                        val limit = acc + v
+                        if (random < limit) Some(k) else attempt(m, limit, random)
+                    }
+                }
+            }
+            else None
+        }
+
+
+        // Initiate control flow and evaluate return value or throw an error
+        attempt(m.iterator, 0.0f, num).getOrElse(throw new RandomDistributionError("Failed to retrieve a random number."))
+    }
+
+
+    // TODO: Evaluate style , compare with mapped version above
     @throws[RandomDistributionError]
     def selectFromDistribution(probabilities: Array[Float]): Int = {
 
@@ -17,7 +53,7 @@ object Random {
         // Generate a random float (0, 1.000]
         lazy val num: Float = {
             new Random().nextFloat() match {
-                case x: Float => if (x != 0) x else num
+                case x => if (x != 0) x else num
             }
         }
 
@@ -40,6 +76,7 @@ object Random {
             case e: Exception => throw e
         }
     }
+
 
     class RandomDistributionError(msg: String) extends Exception(msg: String) {
         def this(msg: String, cause: Throwable) {
