@@ -1,6 +1,8 @@
 package com.cdecoux.model
 
-class MarkovChain {
+class MarkovChain[T](val transition_map: Map[T, Map[T, Float]]) {
+
+
 
     /*
         TODO:
@@ -14,9 +16,8 @@ class MarkovChain {
 
 object MarkovChain {
 
-    // TODO: Define constructors given inputs
-    def apply(): MarkovChain ={
-        new MarkovChain()
+    def apply[T](transition_map: Map[T, Map[T, Float]]): MarkovChain[T] = {
+        new MarkovChain[T](transition_map)
     }
 
     /**
@@ -35,7 +36,11 @@ object MarkovChain {
         }
     }
 
-    def chainFromTransitionCounts[T](transition_map_counts: Map[T, Map[T, Int]]): MarkovChain ={
-         MarkovChain()
+
+    def chainFromTransitionCounts[T](transition_map_counts: Map[T, Map[T, Int]]): MarkovChain[T] = {
+
+        val transition_table =  Map[T, Map[T, Float]]()
+
+        MarkovChain[T](transition_table)
     }
 }
