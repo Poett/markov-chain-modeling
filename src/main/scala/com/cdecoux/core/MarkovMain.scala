@@ -10,7 +10,7 @@ object MarkovMain {
         val prob = Array(0.1, 0.4, 0.5)
 
         // Less than 0.1, A. Less than 0.5, B. Less than 1, C.
-        val values = new Array[String](100000000).map(_ => label(Random.selectFromDistribution(prob)))
+        val values = new Array[String](10000000).map(_ => label(Random.selectFromDistribution(prob)))
 
 
         val counts = values.groupBy(identity).transform( (x, a) => a.length)
