@@ -1,4 +1,4 @@
-package com.cdecoux.titan.util
+package com.cdecoux.util
 
 import scala.annotation.tailrec
 import scala.util.{Failure, Random, Success, Try}

@@ -1,4 +1,4 @@
-package com.cdecoux.titan.model
+package com.cdecoux.model
 
 class MarkovChain {
     // TODO evaluate helpfulness of instantiated Markov Chain object

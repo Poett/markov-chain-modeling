@@ -1,10 +1,6 @@
-package com.cdecoux.titan.core
+package com.cdecoux.core
 
-import com.cdecoux.titan.util.Random
-
-import scala.util.Sorting
-import scala.runtime.ScalaRunTime._
-
+import com.cdecoux.util.Random
 
 object MarkovMain {
 
@@ -14,10 +10,8 @@ object MarkovMain {
         val prob = Array(0.1, 0.4, 0.5)
 
         // Less than 0.1, A. Less than 0.5, B. Less than 1, C.
-        val values = new Array[String](10000).map(_ => label(Random.selectFromDistribution(prob)))
+        val values = new Array[String](100000000).map(_ => label(Random.selectFromDistribution(prob)))
 
-        Sorting.quickSort(values)
-        println(stringOf(values))
 
         val counts = values.groupBy(identity).transform( (x, a) => a.length)
 
