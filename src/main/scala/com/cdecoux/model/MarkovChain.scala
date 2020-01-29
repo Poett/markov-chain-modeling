@@ -2,7 +2,7 @@ package com.cdecoux.model
 
 import com.cdecoux.util.RandomUtil
 
-class MarkovChain[T](val transition_map: Map[T, Map[T, Float]]) {
+class MarkovChain[T](val transition_map: Map[T, Map[T, Double]]) {
 
 
 
@@ -22,7 +22,7 @@ class MarkovChain[T](val transition_map: Map[T, Map[T, Float]]) {
 
 object MarkovChain {
 
-    def apply[T](transition_map: Map[T, Map[T, Float]]): MarkovChain[T] = {
+    def apply[T](transition_map: Map[T, Map[T, Double]]): MarkovChain[T] = {
         new MarkovChain[T](transition_map)
     }
 

@@ -23,9 +23,9 @@ object MarkovMain {
 //        val counts = values.groupBy(identity).transform( (_, a) => a.length)
 //
 //        val total = counts.foldLeft(0)(_ + _._2)
-//        val a_percentage: Float = counts("A") / total.toFloat
-//        val b_percentage: Float = counts("B") / total.toFloat
-//        val c_percentage: Float = counts("C") / total.toFloat
+//        val a_percentage: Double = counts("A") / total.toDouble
+//        val b_percentage: Double = counts("B") / total.toDouble
+//        val c_percentage: Double = counts("C") / total.toDouble
 //
 //
 //        println(s"Total: $total")

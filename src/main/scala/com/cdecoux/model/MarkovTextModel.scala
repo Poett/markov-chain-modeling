@@ -2,7 +2,6 @@ package com.cdecoux.model
 
 object MarkovTextModel {
 
-    // TODO change from int to float for probabilities. Set here for compile
     def parseText(text_blob: String): MarkovChain[String] ={
 
         val text_array = text_blob.split(" +")
