@@ -11,7 +11,7 @@ object MarkovTextModel {
 
 
         val text_transition_counts = text_array.foldLeft((transition_table, ".")) {
-            case ((table, prev_word), word) => {
+            case ((table, prev_word), word) =>
                 val current_count = table(prev_word)(word)
                 val delta = (word -> (current_count + 1))
                 val new_state_transitions = table(prev_word) + delta
@@ -19,7 +19,6 @@ object MarkovTextModel {
                 val new_transition_table = table + (prev_word -> new_state_transitions)
 
                 (new_transition_table, word)
-            }
         }._1
 
         MarkovChain.chainFromTransitionCounts[String](text_transition_counts)

@@ -1,5 +1,7 @@
 package com.cdecoux.model
 
+import com.cdecoux.util.RandomUtil
+
 class MarkovChain[T](val transition_map: Map[T, Map[T, Float]]) {
 
 
@@ -11,6 +13,10 @@ class MarkovChain[T](val transition_map: Map[T, Map[T, Float]]) {
             Transformation operator functions
                 - Need to be able to update from an existing chain, such as using + operator. +(): MarkovChain or something
      */
+
+    def step(from: T): T = {
+        RandomUtil.selectFromDistribution(transition_map(from))
+    }
 
 }
 
@@ -40,10 +46,10 @@ object MarkovChain {
     def chainFromTransitionCounts[T](transition_map_counts: Map[T, Map[T, Int]]): MarkovChain[T] = {
 
         val transition_table = transition_map_counts map {
-            case (k, m: Map[String, Int]) =>
+            case (k, m: Map[T, Int]) =>
                 val total = m.values.sum
                 (k, m map {
-                    case (k: String, v: Int) =>
+                    case (k: T, v: Int) =>
                         (k -> v.toFloat / total)
 
                 })

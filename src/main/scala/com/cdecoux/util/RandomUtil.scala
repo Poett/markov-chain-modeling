@@ -22,7 +22,7 @@ object RandomUtil {
     def selectFromDistribution[T](m: Map[T, Float]): T = {
 
         // Check for incorrect format for probability model
-        if(m.values.sum != 1.0) throw new RandomDistributionError("Probability values summation is not 1.0.")
+        if(BigDecimal.decimal(m.values.sum).setScale(7, BigDecimal.RoundingMode.UP) != 1.0) throw new RandomDistributionError("Probability values summation is not 1.0.")
 
 
         // Generate a random float (0, 1.000]
