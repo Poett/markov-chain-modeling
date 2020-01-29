@@ -50,7 +50,7 @@ object MarkovChain {
                 val total = m.values.sum
                 (k, m map {
                     case (k: T, v: Int) =>
-                        (k -> v.toFloat / total)
+                        (k -> v.toDouble / total)
 
                 })
         }

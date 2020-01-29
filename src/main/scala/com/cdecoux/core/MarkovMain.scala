@@ -33,12 +33,14 @@ object MarkovMain {
 //        println(s"B Counts | Percentage: ${counts("B")} | $b_percentage")
 //        println(s"C Counts | Percentage: ${counts("C")} | $c_percentage")
 
-        val text_blob = "A A A A A B A B A B A A A A B C C C C C C C C C C C C C C C C C A ."
+        val text_source = scala.io.Source.fromFile("resources/example.txt")
+        val text_blob = try text_source.mkString.replaceAll("\\.", " \\.") finally text_source.close()
+
 
         val model = MarkovTextModel.parseText(text_blob)
 
 
-        val blob = new Array[String](20).scanLeft(model.step(".")) {
+        val blob = new Array[String](100).scanLeft(model.step(".")) {
             case (p, n) => model.step(p)
         }
 
